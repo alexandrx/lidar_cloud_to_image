@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package>
+    <name>lidar_cloud_to_image</name>
+    <version>1.0.0</version>
+    <description>Conversion from 3D LiDAR pointcloud to images</description>
+    <maintainer email="alexander@g.sp.m.is.nagoya-u.ac.jp">alexandrx</maintainer>
+    <license>Apache 2</license>
+    <buildtool_depend>catkin</buildtool_depend>
+    <buildtool_depend>autoware_build_flags</buildtool_depend>
+
+    <buildtool_depend>catkin</buildtool_depend>
+    
+    <build_depend>roscpp</build_depend>
+    <build_depend>sensor_msgs</build_depend>
+    <build_depend>std_msgs</build_depend>
+    <build_depend>pcl_ros</build_depend>
+    <build_depend>cv_bridge</build_depend>
+
+    <run_depend>roscpp</run_depend>
+    <run_depend>sensor_msgs</run_depend>
+    <run_depend>std_msgs</run_depend>
+    <run_depend>pcl_ros</run_depend>
+    <run_depend>cv_bridge</run_depend>
+
+  <test_depend>rosunit</test_depend>
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+  </export>
+  
+</package>

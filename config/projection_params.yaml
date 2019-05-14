@@ -1,0 +1,128 @@
+# LiDARs projection parameters
+- name: HDL-32
+  params:
+    vertical_span:
+      start_angle: 10
+      end_angle: -30
+      step: 1.25
+      angle_correction_table: [10.67, 9.33, 8, 6.67, 5.33, 4, 2.67, 1.33, 0, -1.33, -2.67, -4, -5.33, -6.67, -8, -9.33, -10.67, -12, -13.33, -14.67, -16, -17.33, -18.67, -20, -21.33, -22.67, -24, -25.33, -26.67, -28, -29.33, -30.67]
+    horizontal_span:
+      start_angle: -180
+      end_angle: 180
+      step: 0.4137931
+    scan_direction: CW
+- name: HDL-64-S2
+  params:
+    vertical_span:
+      start_angle: 2
+      end_angle: -24.8
+      step: 0.41875
+      angle_correction_table: [4.97009, 4.49316, 4.00396, 3.5025, 2.97714, 2.48635, 1.9718, 1.44522, 0.976948, 0.508544, -0.217594, -0.568941, -1.15441, -1.58751, -2.05552, -2.59339, -3.18918, -3.71431, -4.16892, -4.70446, -5.1927, -5.6686, -6.25946, -6.86054, -7.26426, -7.78227, -8.35633, -8.76862, -9.07171, -9.33972, -9.61906, -9.81801, -9.99435, -10.3629, -10.5387, -10.8608, -10.9457, -11.5203, -12.0702, -12.417, -12.9743, -13.4073, -14.0814, -14.5981, -15.1778, -15.6893, -16.1118, -16.554, -17.112, -17.7622, -18.2178, -18.7236, -19.1845, -19.5702, -20.1194, -20.8593, -21.308, -21.8851, -22.3575, -22.7272, -23.184, -23.8536, -24.4193, -24.8451]
+    horizontal_span:
+      start_angle: -180
+      end_angle: 180
+      step: 0.4137931
+    scan_direction: CW
+- name: HDL-64-S3
+  params:
+    vertical_span:
+      start_angle: 2
+      end_angle: -24
+      step: 0.40625
+      angle_correction_table: [2.28525, 1.9601, 1.64184, 1.30008, 0.986315, 0.630338, 0.283682, -0.088762, -0.414352, -0.772704, -1.02094, -1.44004, -1.76304, -2.10698, -2.42973, -2.8014, -3.1378, -3.49733, -3.81227, -4.19222, -4.46007, -4.82077, -5.19967, -5.58044, -5.86106, -6.20854, -6.51856, -6.87439, -7.20202, -7.57522, -7.84665, -8.28753, -8.61201, -9.19273, -9.62589, -9.93754, -10.5658, -11.1893, -11.6215, -12.1553, -12.5777, -12.9098, -13.425, -14.2421, -14.7515, -15.2585, -15.7088, -16.0361, -16.7432, -17.2659, -17.8026, -18.3023, -18.6984, -19.0674, -19.7633, -20.3359, -20.8757, -21.4035, -21.8508, -22.3214, -22.8168, -23.3184, -23.9378, -24.3474]
+    horizontal_span:
+      start_angle: -180
+      end_angle: 180
+      step: 0.4137931
+    scan_direction: CW
+- name: OS-1-16-0512
+  params:
+    vertical_span:
+      start_angle: 16.6
+      end_angle: -16.6
+      step: 2.075
+    horizontal_span:
+      start_angle: -180
+      end_angle: 180
+      step: 0.703125
+    scan_direction: CCW
+- name: OS-1-16-1024
+  params:
+    vertical_span:
+      start_angle: 16.6
+      end_angle: -16.6
+      step: 2.075
+    horizontal_span:
+      start_angle: -180
+      end_angle: 180
+      step: 0.3515625
+    scan_direction: CCW
+- name: OS-1-16-2048
+  params:
+    vertical_span:
+      start_angle: 16.6
+      end_angle: -16.6
+      step: 2.075
+    horizontal_span:
+      start_angle: -180
+      end_angle: 180
+      step: 0.1757812
+    scan_direction: CCW
+- name: OS-1-64-0512
+  params:
+    vertical_span:
+      start_angle: 16.6
+      end_angle: -16.6
+      step: 0.51875
+    horizontal_span:
+      start_angle: -180
+      end_angle: 180
+      step: 0.703125
+    scan_direction: CCW
+- name: OS-1-64-1024
+  params:
+    vertical_span:
+      start_angle: 16.6
+      end_angle: -16.6
+      step: 0.51875
+    horizontal_span:
+      start_angle: -180
+      end_angle: 180
+      step: 0.3515625
+    scan_direction: CCW
+- name: OS-1-64-2048
+  params:
+    vertical_span:
+      start_angle: 16.6
+      end_angle: -16.6
+      step: 0.51875
+      angle_correction_table: [16.9837, 16.379, 15.8094, 15.2764, 14.7984, 14.2207, 13.6674, 13.1275, 12.6667, 12.101, 11.5522, 11.0168, 10.5602, 10.0008, 9.45254, 8.91996, 8.46728, 7.91716, 7.37047, 6.83026, 6.38051, 5.82894, 5.29042, 4.74584, 4.29986, 3.74838, 3.20177, 2.66482, 2.21897, 1.66367, 1.11826, 0.570547, 0.12198, -0.426356, -0.971713, -1.52055, -1.95829, -2.52203, -3.06985, -3.62169, -4.07352, -4.61215, -5.16068, -5.72046, -6.16439, -6.71053, -7.26345, -7.82171, -8.27524, -8.819, -9.3685, -9.94076, -10.3941, -10.9399, -11.4959, -12.0759, -12.5238, -13.0731, -13.6345, -14.224, -14.7005, -15.2614, -15.834, -16.4386]
+    horizontal_span:
+      start_angle: -180
+      end_angle: 180
+      step: 0.1757812
+    scan_direction: CCW
+- name: VLP-16
+  params:
+    vertical_span:
+      start_angle: 15
+      end_angle: -15
+      step: 1.875
+      angle_correction_table: [15, 13, 11, 9, 7, 5, 3, 1, -1, -3, -5, -7, -9, -11, -13, -15]
+    horizontal_span:
+      start_angle: -180
+      end_angle: 180
+      step: 0.4137931
+    scan_direction: CW
+- name: VLP-32
+  params:
+    vertical_span:
+      start_angle: 15
+      end_angle: -25
+      step: 1.25
+      angle_correction_table: [15, 10.333, 7, 4.667, 3.333, 2.333, 1.667, 1.333, 1, 0.667, 0.333, 0, -0.333, -0.667, -1, -1.333, -1.667, -2, -2.333, -2.667, -3, -3.333, -3.667, -4, -4.667, -5.333, -6.148, -7.254, -8.843, -11.31, -15.639, -25]
+    horizontal_span:
+      start_angle: -180
+      end_angle: 180
+      step: 0.4137931
+    scan_direction: CW

@@ -1,0 +1,31 @@
+# LiDARs projection parameters
+- name: HDL-32
+  params:
+    vertical_span:
+      start_angle: 10
+      end_angle: -30
+      step: 1.25
+    horizontal_span:
+      start_angle: -180
+      end_angle: 180
+      step: 0.4137931
+- name: HDL-64
+  params:
+    vertical_span:
+      start_angle: 2
+      end_angle: -24.87
+      step: 0.4198438
+    horizontal_span:
+      start_angle: -180
+      end_angle: 180
+      step: 0.4137931
+- name: VLP-16
+  params:
+    vertical_span:
+      start_angle: 15
+      end_angle: -15
+      step: 1.875
+    horizontal_span:
+      start_angle: -180
+      end_angle: 180
+      step: 0.4137931

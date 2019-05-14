@@ -1,0 +1,39 @@
+<!-- -*- mode: XML -*- -->
+<!-- Launch file for LiDAR Cloud to Image -->
+<launch>
+    <arg name="proj_params" default="src/lidar_range_image/config/projection_params.yaml" doc="Path to the sensor projection parameters file" />
+    <arg name="cloud_topic" default="/points_raw" doc="LiDAR pointcloud topic name" />
+    <arg name="sensor_model" default="HDL-64" doc="Model of the LiDAR sensor for this conversion" />
+    <arg name="point_type" default="XYZI" doc="Point format of the 3D pointcloud, valid options: XYZ, XYZI, XYZIR, XYZIF, XYZIFN" />
+    <arg name="depth_image_topic" default="/c2i_depth_image" doc="Topic name for the depth (range) ouput image" />
+    <arg name="intensity_image_topic" default="/c2i_intensity_image" doc="Topic name for the intensity ouput image" />
+    <arg name="reflectance_image_topic" default="/c2i_reflectance_image" doc="Topic name for the reflectance ouput image" />
+    <arg name="noise_image_topic" default="/c2i_noise_image" doc="Topic name for the noise ouput image" />
+    <arg name="h_scale" default="1.0" doc="Horizontal scale factor" />
+    <arg name="v_scale" default="1.0" doc="Vectical scale factor" />
+    <arg name="output_mode" default="SINGLE" doc="How output images are published. SINGLE: each image is independent, GROUP: all images are grouped into one, STACK: all images are combined one per channel, ALL: single images + group images + stack images will be published" />
+    <arg name="save_images" default="false" doc="Output also the PNG files for the generated images" />
+    <arg name="overlapping" default="0" doc="Whether to copy a block of image from left to the right to close the circle, this parameter controls how much to copy" />
+    <arg name="8bpp" default="false" doc="Whether to output 8 bit mode images" />
+    <arg name="equalize" default="false" doc="Whether to equalize histogram for output images" />
+    <arg name="flip" default="false" doc="Whether to flip horizontally the image" />
+    
+    <node pkg="lidar_cloud_to_image" type="cloud2image" name="cloud2image" output="screen">
+        <param name="proj_params" type="str" value="$(arg proj_params)"/>
+        <param name="cloud_topic" type="str" value="$(arg cloud_topic)"/>
+        <param name="sensor_model" type="str" value="$(arg sensor_model)"/>
+        <param name="point_type" type="str" value="$(arg point_type)"/>
+        <param name="depth_image_topic" type="str" value="$(arg depth_image_topic)"/>
+        <param name="intensity_image_topic" type="str" value="$(arg intensity_image_topic)"/>
+        <param name="reflectance_image_topic" type="str" value="$(arg reflectance_image_topic)"/>
+        <param name="noise_image_topic" type="str" value="$(arg noise_image_topic)"/>
+        <param name="h_scale" type="double" value="$(arg h_scale)"/>
+        <param name="v_scale" type="double" value="$(arg v_scale)"/>
+        <param name="output_mode" type="str" value="$(arg output_mode)"/>
+        <param name="save_images" type="bool" value="$(arg save_images)"/>
+        <param name="overlapping" type="int" value="$(arg overlapping)"/>
+        <param name="8bpp" type="bool" value="$(arg 8bpp)"/>
+        <param name="equalize" type="bool" value="$(arg equalize)"/>
+        <param name="flip" type="bool" value="$(arg flip)"/>
+    </node>
+</launch>
