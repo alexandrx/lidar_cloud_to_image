@@ -457,24 +457,15 @@ void CloudProjection::cloudToPCDFile(const pcl::PointCloud<pcl::PointXYZI>::Cons
 void CloudProjection::cvMatToDepthPNG(const cv::Mat& image, const std::string& filename)
 {
   if (image.type() != CV_32F && image.type() != CV_16U) {
-    throw std::runtime_error("wrong image format, cannot save");
+    throw std::runtime_error("wrong image format for depth information, cannot save when saving image for file \"" + filename + "\"");
   }
-  if (image.rows < 1 || image.cols < 1) {
-    throw std::runtime_error("wrong image format, cannot save");;
-  }
-  
-  try {
-      cv::imwrite(filename, image);
-  }
-  catch (std::runtime_error& ex) {
-      fprintf(stderr, "Exception converting image to PNG format: %s\n", ex.what());
-  }
+  cvMatToColorPNG(image, filename);
 }
 
 void CloudProjection::cvMatToColorPNG(const cv::Mat& image, const std::string& filename)
 {
   if (image.rows < 1 || image.cols < 1) {
-    throw std::runtime_error("wrong image format, cannot save");;
+    throw std::runtime_error("wrong image format, cannot save when saving image for file \"" + filename + "\"");
   }  
   try {
       cv::imwrite(filename, image);

@@ -1,7 +1,8 @@
 <!-- -*- mode: XML -*- -->
 <!-- Launch file for LiDAR Cloud to Image -->
 <launch>
-    <arg name="proj_params" default="src/lidar_range_image/config/projection_params.yaml" doc="Path to the sensor projection parameters file" />
+1
+    <arg name="proj_params" default="$(find lidar_cloud_to_image)/config/projection_params.yaml" doc="Path to the sensor projection parameters file" />
     <arg name="cloud_topic" default="/points_raw" doc="LiDAR pointcloud topic name" />
     <arg name="sensor_model" default="HDL-64" doc="Model of the LiDAR sensor for this conversion" />
     <arg name="point_type" default="XYZI" doc="Point format of the 3D pointcloud, valid options: XYZ, XYZI, XYZIR, XYZIF, XYZIFN" />

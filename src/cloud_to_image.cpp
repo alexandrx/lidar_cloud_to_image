@@ -35,7 +35,7 @@ CloudToImage::CloudToImage():
   _reflectance_image = cv::Mat::zeros(1, 1, CV_16UC1);
   _noise_image = cv::Mat::zeros(1, 1, CV_16UC1);	
   _group_image = cv::Mat::zeros(1, 1, CV_16UC1);
-  _stack_image = cv::Mat::zeros(1, 1, CV_16UC1);
+  _stack_image = cv::Mat::zeros(1, 1, CV_16UC3);
 }
 
 CloudToImage::~CloudToImage() 
@@ -255,6 +255,7 @@ void CloudToImage::publishImages(const std_msgs::Header& header)
 			if (_flip) cv::flip( mono_img, mono_img, 1);
 			sensor_msgs::ImagePtr depth_img = cv_bridge::CvImage(header, encoding, mono_img).toImageMsg();
 			_pub_DepthImage.publish(depth_img);
+			if (_8bpp) _depth_image = mono_img;
 		}
 		if (_has_intensity_image && _pub_IntensityImage.getNumSubscribers() > 0) {
 
@@ -265,6 +266,7 @@ void CloudToImage::publishImages(const std_msgs::Header& header)
 			if (_flip) cv::flip( mono_img, mono_img, 1);
 			sensor_msgs::ImagePtr intensity_img = cv_bridge::CvImage(header, encoding, mono_img).toImageMsg();
 			_pub_IntensityImage.publish(intensity_img);
+			if (_8bpp) _intensity_image = mono_img;
 		}
 		if (_has_reflectance_image && _pub_ReflectanceImage.getNumSubscribers() > 0) {
 			cv::Mat mono_img = cv::Mat(_reflectance_image.size(), mode);
@@ -274,6 +276,7 @@ void CloudToImage::publishImages(const std_msgs::Header& header)
 			if (_flip) cv::flip( mono_img, mono_img, 1);
 			sensor_msgs::ImagePtr reflectance_img = cv_bridge::CvImage(header, encoding, mono_img).toImageMsg();
 			_pub_ReflectanceImage.publish(reflectance_img);
+			if (_8bpp) _reflectance_image = mono_img;
 		}
 		if (_has_noise_image && _pub_NoiseImage.getNumSubscribers() > 0) {
 			cv::Mat mono_img = cv::Mat(_noise_image.size(), mode);
@@ -283,6 +286,7 @@ void CloudToImage::publishImages(const std_msgs::Header& header)
 			if (_flip) cv::flip( mono_img, mono_img, 1);
 			sensor_msgs::ImagePtr noise_img = cv_bridge::CvImage(header, encoding, mono_img).toImageMsg();
 			_pub_NoiseImage.publish(noise_img);
+			if (_8bpp) _noise_image = mono_img;
 		}
 	} 
 	if (_output_mode == ImageOutputMode::GROUP || _output_mode == ImageOutputMode::STACK || _output_mode == ImageOutputMode::ALL) {
@@ -364,25 +368,25 @@ void CloudToImage::publishImages(const std_msgs::Header& header)
 				encoding = sensor_msgs::image_encodings::MONO8;
 			}
 			if (img_count == 2) {
-				format = CV_16UC2;
-				encoding = sensor_msgs::image_encodings::RGB16;
+				format = CV_16UC3;
+				encoding = sensor_msgs::image_encodings::BGR16;
 				if (_8bpp) {
-					format = CV_8UC2;
-					encoding = sensor_msgs::image_encodings::RGB8;
+					format = CV_8UC3;
+					encoding = sensor_msgs::image_encodings::BGR8;
 				}
 			} else if (img_count == 3) {
 				format = CV_16UC3;
-				encoding = sensor_msgs::image_encodings::RGB16;
+				encoding = sensor_msgs::image_encodings::BGR16;
 				if (_8bpp) {
 					format = CV_8UC3;
-					encoding = sensor_msgs::image_encodings::RGB8;
+					encoding = sensor_msgs::image_encodings::BGR8;
 				}
 			} else if (img_count == 4) {
 				format = CV_16UC4;
-				encoding = sensor_msgs::image_encodings::RGBA16;
+				encoding = sensor_msgs::image_encodings::BGRA16;
 				if (_8bpp) {
 					format = CV_8UC4;
-					encoding = sensor_msgs::image_encodings::RGBA8;
+					encoding = sensor_msgs::image_encodings::BGRA8;
 				}
 			}
 			cv::Mat mono_img_stack = cv::Mat(mono_img_depth.size(), format); //n channels
@@ -450,34 +454,50 @@ void CloudToImage::saveImages(const std::string& base_name)
 			//save the generated depth image
 			filename = std::string(base_name + "_depth");
 			filename += std::string("_") + timeToStr(ros::WallTime::now()) + std::string(".png");
-			CloudProjection::cvMatToDepthPNG(_depth_image, filename);
+			if (_8bpp) {
+				CloudProjection::cvMatToColorPNG(_depth_image, filename);
+			} else {
+				CloudProjection::cvMatToDepthPNG(_depth_image, filename);
+			}
 		}
 		if (_has_intensity_image) {
 			//save the generated intensity image
 			filename = std::string(base_name + "_intensity");
 			filename += std::string("_") + timeToStr(ros::WallTime::now()) + std::string(".png");
-			CloudProjection::cvMatToDepthPNG(_intensity_image, filename);
+			if (_8bpp) {
+				CloudProjection::cvMatToColorPNG(_intensity_image, filename);
+			} else {
+				CloudProjection::cvMatToDepthPNG(_intensity_image, filename);
+			}
 		}
 
 		if (_has_reflectance_image) {
 			//save the generated reflectance image
 			filename = std::string(base_name + "_reflectance");
 			filename += std::string("_") + timeToStr(ros::WallTime::now()) + std::string(".png");
-			CloudProjection::cvMatToDepthPNG(_reflectance_image, filename);
+			if (_8bpp) {
+				CloudProjection::cvMatToColorPNG(_reflectance_image, filename);
+			} else {
+				CloudProjection::cvMatToDepthPNG(_reflectance_image, filename);
+			}
 		}
 
 		if (_has_noise_image) {
 			//save the generated noise image
 			filename = std::string(base_name + "_noise");
 			filename += std::string("_") + timeToStr(ros::WallTime::now()) + std::string(".png");
-			CloudProjection::cvMatToDepthPNG(_noise_image, filename);
+			if (_8bpp) {
+				CloudProjection::cvMatToColorPNG(_noise_image, filename);
+			} else {
+				CloudProjection::cvMatToDepthPNG(_noise_image, filename);
+			}
 		}
 	} 
 	if (_output_mode == ImageOutputMode::GROUP || _output_mode == ImageOutputMode::ALL) {
 		//save the generated group image
 		filename = std::string(base_name + "_group");
 		filename += std::string("_") + timeToStr(ros::WallTime::now()) + std::string(".png");
-		CloudProjection::cvMatToDepthPNG(_group_image, filename);
+		CloudProjection::cvMatToColorPNG(_group_image, filename);
 	} 
 	if (_output_mode == ImageOutputMode::STACK || _output_mode == ImageOutputMode::ALL) {
 		//save the generated group image
