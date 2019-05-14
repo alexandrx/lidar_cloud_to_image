@@ -10,7 +10,7 @@ https://github.com/PRBonn/cloud_to_image.git
 
 ## Operation
 Several 3D LiDARs are supported:
-- Velodyne: HDL-64-S2, HDL-64-S3, HDL-32, VLP-32, VLP-16
+- Velodyne: VLS-128, HDL-64-S2, HDL-64-S3, HDL-32, VLP-32, VLP-16
 - Ouster: OS-1-16, OS-1-64 (both in 512, 1024 and 2048 modes)
 
 Several pointclouds are supported:
@@ -73,7 +73,7 @@ rosrun image_view image_view image:=/c2i_stack_image
 
 ## Todo
 - [x] Documentation
-- [] VLS-128 support (more testing needed)
+- [x] VLS-128 support (more testing needed)
 - [] Correct odd black horizontal lines
 - [] Add HESAI Pandar64, Pandar40, and Pandar40p support
 - [] Add Robosense RSLidar32 support
